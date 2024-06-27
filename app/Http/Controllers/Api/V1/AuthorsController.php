@@ -15,15 +15,13 @@ class AuthorsController extends ApiController
      */
     public function index(AuthorFilter $filters)
     {
-        return UserResource::collection(User::filter($filters)->paginate());
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(StoreUserRequest $request)
-    {
-        //
+        return UserResource::collection(
+            User::select('users.*')
+                ->join('tickets', 'users.id', '=', 'tickets.user_id')
+                ->filter($filters)
+                ->distinct()
+                ->paginate()
+        );
     }
 
     /**
@@ -36,21 +34,5 @@ class AuthorsController extends ApiController
         }
 
         return new UserResource($author);
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(UpdateUserRequest $request, User $user)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(User $user)
-    {
-        //
     }
 }
