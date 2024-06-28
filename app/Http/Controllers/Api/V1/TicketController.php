@@ -8,7 +8,6 @@ use App\Http\Requests\Api\V1\StoreTicketRequest;
 use App\Http\Requests\Api\V1\UpdateTicketRequest;
 use App\Http\Resources\V1\TicketResource;
 use App\Models\Ticket;
-use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class TicketController extends ApiController
 {
@@ -16,6 +15,7 @@ class TicketController extends ApiController
      * Get all tickets
      *
      * @group Managing Tickets
+     *
      * @queryParam sort string Data field(s) to sort by. Separate multiple fiels with commas. Denote descending sort with a minus sign. Example: sort=title,-createdAt
      * @queryParam filter[status] Filter by status code: A, C, H, X. No-example
      * @queryParam filter[title] Filter by title. Wildcards are supported. Example: *fix*

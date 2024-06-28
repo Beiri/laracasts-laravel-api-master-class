@@ -9,7 +9,6 @@ use App\Http\Requests\Api\V1\UpdateTicketRequest;
 use App\Http\Resources\V1\TicketResource;
 use App\Models\Ticket;
 use App\Models\User;
-use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class AuthorTicketsController extends ApiController
 {
@@ -48,7 +47,7 @@ class AuthorTicketsController extends ApiController
     {
         if ($this->isAble('store', Ticket::class)) {
             return new TicketResource(Ticket::create($request->mappedAttributes([
-                'author' => $author->id
+                'author' => $author->id,
             ])));
         }
 
@@ -61,8 +60,10 @@ class AuthorTicketsController extends ApiController
      * Replaces an author's ticket.
      *
      * @group Managing Tickets by Author
+     *
      * @urlParam author_id integer required The author's ID. No-example
      * @urlParam ticket_id integer required The ticket ID. No-example
+     *
      * @response {"data":{"type":"ticket","id":107,"attributes":{"title":"asdfasdfasdfasdfasdfsadf","description":"test ticket","status":"A","createdAt":"2024-03-26T04:40:48.000000Z","updatedAt":"2024-03-26T04:40:48.000000Z"},"relationships":{"author":{"data":{"type":"user","id":1},"links":{"self":"http:\/\/localhost:8000\/api\/v1\/authors\/1"}}},"links":{"self":"http:\/\/localhost:8000\/api\/v1\/tickets\/107"}}}
      */
     public function replace(ReplaceTicketRequest $request, User $author, Ticket $ticket)
@@ -82,6 +83,7 @@ class AuthorTicketsController extends ApiController
      * Updates an author's ticket.
      *
      * @group Managing Tickets by Author
+     *
      * @urlParam author_id integer required The author's ID. No-example
      * @urlParam ticket_id integer required The ticket ID. No-example
      */
@@ -102,8 +104,10 @@ class AuthorTicketsController extends ApiController
      * Deletes an author's ticket.
      *
      * @group Managing Tickets by Author
+     *
      * @urlParam author_id integer required The author's ID. No-example
      * @urlParam id integer required The ticket ID. No-example
+     *
      * @response {}
      */
     public function destroy(User $author, Ticket $ticket)

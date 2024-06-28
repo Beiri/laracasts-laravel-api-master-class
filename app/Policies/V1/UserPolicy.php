@@ -2,7 +2,6 @@
 
 namespace App\Policies\V1;
 
-use App\Models\Ticket;
 use App\Models\User;
 use App\Permissions\V1\Abilities;
 

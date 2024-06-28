@@ -20,7 +20,7 @@ class TicketResource extends JsonResource
             'attributes' => [
                 'title' => $this->title,
                 'description' => $this->when(
-                    !$request->routeIs(['tickets.index', 'authors.tickets.index']),
+                    ! $request->routeIs(['tickets.index', 'authors.tickets.index']),
                     $this->description
                 ),
                 'status' => $this->status,
@@ -30,16 +30,16 @@ class TicketResource extends JsonResource
             'relationships' => [
                 'author' => [
                     'data' => 'user',
-                    'id' => $this->user_id
+                    'id' => $this->user_id,
                 ],
                 'links' => [
-                    'self' => route('authors.show', ['author' => $this->user_id])
-                ]
+                    'self' => route('authors.show', ['author' => $this->user_id]),
+                ],
             ],
             'includes' => new UserResource($this->whenLoaded('author')),
             'links' => [
-                'self' => route('tickets.show', ['ticket' => $this->id])
-            ]
+                'self' => route('tickets.show', ['ticket' => $this->id]),
+            ],
         ];
     }
 }

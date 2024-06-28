@@ -23,21 +23,21 @@ class ApiExceptions
     {
         // log that sensitive stuff
         // should move this out to custom logger
-        $source = 'Line: ' . $e->getLine() . ', File: ' . $e->getFile();
-        Log::notice(basename(get_class($e)) . ' - ' . $e->getMessage() . ' - ' . $source);
+        $source = 'Line: '.$e->getLine().', File: '.$e->getFile();
+        Log::notice(basename(get_class($e)).' - '.$e->getMessage().' - '.$source);
 
         return response()->json([
             'error' => [
                 'type' => self::getType($e),
                 'status' => 401,
-                'message' => $e->getMessage()
-            ]
+                'message' => $e->getMessage(),
+            ],
         ]);
     }
 
     public static function handleValidationException(ValidationException $e, Request $request): JsonResponse
     {
-        foreach ($e->errors() as $key => $value)
+        foreach ($e->errors() as $key => $value) {
             foreach ($value as $message) {
                 $errors[] = [
                     'type' => self::getType($e),
@@ -45,9 +45,10 @@ class ApiExceptions
                     'message' => $message,
                 ];
             }
+        }
 
         return response()->json([
-            'errors' => $errors
+            'errors' => $errors,
         ]);
     }
 
@@ -57,8 +58,8 @@ class ApiExceptions
             'error' => [
                 'type' => self::getType($e),
                 'status' => 404,
-                'message' => 'Not Found ' . $request->getRequestUri()
-            ]
+                'message' => 'Not Found '.$request->getRequestUri(),
+            ],
         ]);
     }
 

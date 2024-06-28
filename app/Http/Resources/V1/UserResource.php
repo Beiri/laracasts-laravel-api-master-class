@@ -25,12 +25,12 @@ class UserResource extends JsonResource
                     'emailVerifiedAt' => $this->emmail_verified_at,
                     'createdAt' => $this->created_at,
                     'updatedAt' => $this->updated_at,
-                ])
+                ]),
             ],
             'includes' => TicketResource::collection($this->whenLoaded('tickets')),
             'links' => [
-                'self' => route('authors.show', ['author' => $this->id])
-            ]
+                'self' => route('authors.show', ['author' => $this->id]),
+            ],
         ];
     }
 }

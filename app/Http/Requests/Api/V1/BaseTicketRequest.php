@@ -14,7 +14,7 @@ class BaseTicketRequest extends FormRequest
             'data.attributes.status' => 'status',
             'data.attributes.createdAt' => 'created_at',
             'data.attributes.updatedAt' => 'updated_at',
-            'data.relationships.author.data.id' => 'user_id'
+            'data.relationships.author.data.id' => 'user_id',
         ], $otherAttributes);
 
         $attributesToUpdate = [];
@@ -31,7 +31,7 @@ class BaseTicketRequest extends FormRequest
     public function messages()
     {
         return [
-            'data.attributes.status' => 'The data.attributes.status value is invalid. Please use A, C, H, or X.'
+            'data.attributes.status' => 'The data.attributes.status value is invalid. Please use A, C, H, or X.',
         ];
     }
 }
